@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pytest
 
+
 # Must be set before the app (and its settings) are imported.
 _TMP_DIR = Path(tempfile.mkdtemp(prefix="taskmaster-tests-"))
 os.environ["DATABASE_URL"] = f"sqlite:///{(_TMP_DIR / 'test.db').as_posix()}"
@@ -73,3 +74,5 @@ def team_with_members(client, make_user):
     resp = client.post(f"/api/v1/invitations/{invite['id']}/accept", headers=bob.headers)
     assert resp.status_code == 200, resp.text
     return team, alice, bob, carol
+
+
